@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -164,7 +165,7 @@ fun HomeScreen(sales: List<SaleEntity>, expenses: List<ExpenseEntity>, inventory
         }}
         item { Text("Quick actions", fontWeight = FontWeight.Bold) }
         item { Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Quick("Sale","＋"){onAdd("sale")}; Quick("Expense","−"){onAdd("expense")}; Quick("Purchase","▣"){onAdd("purchase")}; Quick("Stock","□"){onAdd("inventory")}
+            Quick("Sale","＋",Modifier.weight(1f)){onAdd("sale")}; Quick("Expense","−",Modifier.weight(1f)){onAdd("expense")}; Quick("Purchase","▣",Modifier.weight(1f)){onAdd("purchase")}; Quick("Stock","□",Modifier.weight(1f)){onAdd("inventory")}
         }}
         item { Text("Recent activity", fontWeight = FontWeight.Bold) }
         if (sales.isEmpty() && expenses.isEmpty()) item {
@@ -184,7 +185,7 @@ fun HomeScreen(sales: List<SaleEntity>, expenses: List<ExpenseEntity>, inventory
 }
 
 @Composable fun StatCard(label:String,value:String,modifier:Modifier=Modifier){Card(modifier){Column(Modifier.padding(14.dp)){Text(label.uppercase(),style=MaterialTheme.typography.labelSmall,color=Color.Gray,fontWeight=FontWeight.Bold);Text(value,fontWeight=FontWeight.ExtraBold,style=MaterialTheme.typography.titleLarge)}}}
-@Composable fun Quick(label:String,icon:String,onClick:()->Unit){Button(onClick=onClick,modifier=Modifier.weight(1f),shape=RoundedCornerShape(14.dp),contentPadding=PaddingValues(5.dp)){Column(horizontalAlignment=Alignment.CenterHorizontally){Text(icon);Text(label,style=MaterialTheme.typography.labelSmall)}}}
+@Composable fun Quick(label:String,icon:String,modifier:Modifier=Modifier,onClick:()->Unit){Button(onClick=onClick,modifier=modifier,shape=RoundedCornerShape(14.dp),contentPadding=PaddingValues(5.dp)){Column(horizontalAlignment=Alignment.CenterHorizontally){Text(icon);Text(label,style=MaterialTheme.typography.labelSmall)}}}
 @Composable fun TxRow(title:String,amount:String,sub:String){Row(Modifier.fillMaxWidth().padding(vertical=9.dp),horizontalArrangement=Arrangement.SpaceBetween){Column(Modifier.weight(1f)){Text(title,fontWeight=FontWeight.Bold);Text(sub,style=MaterialTheme.typography.bodySmall,color=Color.Gray)};Text(amount,fontWeight=FontWeight.Bold)}}
 
 @Composable
